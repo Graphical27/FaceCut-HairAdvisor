@@ -7,8 +7,13 @@ from PIL import Image, ImageTk
 import os
 import numpy as np
 from torchvision import models
+
 import matplotlib.pyplot as plt
 import random
+
+
+
+
 
 class GenderClassifierApp:
     def __init__(self, root):

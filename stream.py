@@ -1,8 +1,11 @@
+
+
 import streamlit as st
 import torch
 from torchvision import transforms
 from PIL import Image
 import torch.nn as nn
+
 
 @st.cache_resource
 def load_model():
@@ -32,7 +35,7 @@ def predict(img: Image.Image):
         s = shape_classes[s_logits.argmax(1).item()]
     return g, s
 
-st.title("🚀 Gender & Face‑Shape Classifier")
+st.title(" Gender & Face‑Shape Classifier")
 
 mode = st.radio("Input:", ["Upload an image","Use camera"])
 img: Image.Image = None

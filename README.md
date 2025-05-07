@@ -40,5 +40,4 @@ FaceCut HairAdvisor uses machine learning to recognize patterns in facial struct
 
 <br><br>
 
-
 ![yoda](https://github.com/MITDeepLearning/introtodeeplearning/raw/2025/lab3/img/yoda_wallpaper.jpg)

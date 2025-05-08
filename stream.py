@@ -6,7 +6,6 @@ from torchvision import transforms
 from PIL import Image
 import torch.nn as nn
 
-
 @st.cache_resource
 def load_model():
     state_dict = torch.load("model/main_model.pth", map_location="cpu")

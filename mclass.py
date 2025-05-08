@@ -6,6 +6,7 @@ from torch.utils.data import DataLoader
 from PIL import Image
 from pathlib import Path
 import matplotlib.pyplot as plt
+
 class MultiTaskModel(nn.Module):
     def __init__(self, backbone_name="resnet18", num_shape_classes=5):
         super().__init__()

@@ -1,43 +1,12 @@
-# FaceCut-HairAdvisor <img align="right" src="https://img.shields.io/github/watchers/Graphical27/FaceCut-HairAdvisor?style=flat-square"> <img align="right" src="https://img.shields.io/github/stars/Graphical27/FaceCut-HairAdvisor?style=flat-square"> <img align="right" src="https://img.shields.io/github/forks/Graphical27/FaceCut-HairAdvisor?style=flat-square">
+# React + Vite
 
-<br>
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-# [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com) &nbsp;&nbsp; :snake: 
-<br>
-This repository contains AI-based projects and tutorials focusing on facial analysis and hairstyle recommendation systems, from beginner to advanced levels. Our goal is to build an AI-powered tool that provides personalized hairstyle suggestions based on individual face shapes and features.
+Currently, two official plugins are available:
 
-## What is FaceCut HairAdvisor? 📐
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-**FaceCut HairAdvisor** is an AI-driven system designed to analyze facial features and suggest hairstyles that complement your face shape. By utilizing computer vision and machine learning techniques, the system recognizes key facial landmarks, identifies face shapes, and provides hairstyle recommendations tailored to enhance your appearance.
+## Expanding the ESLint configuration
 
-## How It Works 🤖
-
-FaceCut HairAdvisor uses machine learning to recognize patterns in facial structures. It analyzes your face using deep learning models, classifies the face shape, and matches it with a curated set of hairstyles. The system continuously learns and improves, making its recommendations more accurate with time.
-
-## Key Features ✨
-- **Real-time facial analysis**: Identify face shapes and features using computer vision.
-- **Personalized hairstyle suggestions**: Get hairstyle recommendations tailored to your face shape.
-- **AI-driven improvements**: The system automatically improves through machine learning as it trains on more data.
-- **Beginner to advanced tutorials**: Step-by-step tutorials and projects ranging from basic facial analysis to advanced hairstyle recommendation systems.
-
-<br>
-
-## Useful Downloads 
-* #### [Pycharm](https://www.jetbrains.com/pycharm/download/#section=windows)
-* #### [Anaconda](https://www.anaconda.com/)
-* #### [Jupyter](https://jupyter.org/)
-
-<br>
-
-## Top libraries
-* #### [PyTorch](https://pytorch.org/)
-* #### [Numpy](https://numpy.org/)
-* #### [Scikit-learn](https://scikit-learn.org/stable/index.html)
-* #### [Pandas](https://pandas.pydata.org/)
-* #### [Matplotlib](https://pytorch.org/)
-* #### [Open CV](https://opencv.org/)
-* #### [Streamlit](https://streamlit.io/)
-
-<br><br>
-
-![yoda](https://github.com/MITDeepLearning/introtodeeplearning/raw/2025/lab3/img/yoda_wallpaper.jpg)
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

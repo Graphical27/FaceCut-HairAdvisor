@@ -1,11 +1,6 @@
-import torch
+# bits/stdc++.h style: we just define your model here
 import torch.nn as nn
-import torch.optim as optim
-from torchvision import models, transforms, datasets
-from torch.utils.data import DataLoader
-from PIL import Image
-from pathlib import Path
-import matplotlib.pyplot as plt
+from torchvision import models
 
 class MultiTaskModel(nn.Module):
     def __init__(self, backbone_name="resnet18", num_shape_classes=5):

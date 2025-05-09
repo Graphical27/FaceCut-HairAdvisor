@@ -3,6 +3,7 @@ import Webcam from 'react-webcam'
 import axios from 'axios'
 import './styles.css'
 
+
 export default function App() {
   const [preview, setPreview] = useState(null)
   const [result, setResult] = useState(null)
@@ -14,6 +15,7 @@ export default function App() {
   const fileInputRef = useRef(null)
   
   // References for animations
+
   const homeRef = useRef(null)
   const analyzerRef = useRef(null)
   
@@ -58,6 +60,7 @@ export default function App() {
     setPreview(url)
     sendFile(file)
   }
+
 
   const capture = async () => {
     const imageSrc = webcamRef.current.getScreenshot()

@@ -7,6 +7,7 @@ from io import BytesIO
 from mclass import MultiTaskModel
 
 app = FastAPI()
+
 # Enable CORS so frontend can call
 app.add_middleware(
     CORSMiddleware,

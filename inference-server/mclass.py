@@ -11,6 +11,7 @@ class MultiTaskModel(nn.Module):
         self.gender_head = nn.Linear(feat_dim, 2)
         self.shape_head  = nn.Linear(feat_dim, num_shape_classes)
 
+    #forward
     def forward(self, x):
         x = self.features(x).view(x.size(0), -1)
         return self.gender_head(x), self.shape_head(x)

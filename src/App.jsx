@@ -20,6 +20,7 @@ export default function App() {
   
   useEffect(() => {
     // Add animation class when analyzer becomes visible
+      if (analyzerVisible && analyzerRef.current) {
       analyzerRef.current.classList.add('analyzer-appear')
     }
   }, [analyzerVisible])

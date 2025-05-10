@@ -1,3 +1,5 @@
+
+
 # FaceCut-HairAdvisor <img align="right" src="https://img.shields.io/github/watchers/Graphical27/FaceCut-HairAdvisor?style=flat-square"> <img align="right" src="https://img.shields.io/github/stars/Graphical27/FaceCut-HairAdvisor?style=flat-square"> <img align="right" src="https://img.shields.io/github/forks/Graphical27/FaceCut-HairAdvisor?style=flat-square">
 
 <br>
@@ -17,7 +19,7 @@ FaceCut HairAdvisor uses machine learning to recognize patterns in facial struct
 ## Key Features ✨
 - **Real-time facial analysis**: Identify face shapes and features using computer vision.
 - **Personalized hairstyle suggestions**: Get hairstyle recommendations tailored to your face shape.
-- **AI-driven improvements**: The system automatically improves through machine learning as it trains on more data.
+- **AI-driven improvements**: The system automatically improves through machine learning as it train on more data.
 - **Beginner to advanced tutorials**: Step-by-step tutorials and projects ranging from basic facial analysis to advanced hairstyle recommendation systems.
 
 <br>

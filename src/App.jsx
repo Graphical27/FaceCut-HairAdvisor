@@ -15,13 +15,11 @@ export default function App() {
   const fileInputRef = useRef(null)
   
   // References for animations
-
   const homeRef = useRef(null)
   const analyzerRef = useRef(null)
   
   useEffect(() => {
     // Add animation class when analyzer becomes visible
-    if (analyzerVisible && analyzerRef.current) {
       analyzerRef.current.classList.add('analyzer-appear')
     }
   }, [analyzerVisible])

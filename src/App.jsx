@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import Webcam from 'react-webcam'
 import axios from 'axios'
 import './styles.css'
-
+import './index.css'
 
 export default function App() {
   const [preview, setPreview] = useState(null)

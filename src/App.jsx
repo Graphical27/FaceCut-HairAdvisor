@@ -90,13 +90,16 @@ export default function App() {
       {appState === 'home' && (
         <div className="home-container" ref={homeRef}>
           <header className="home-header">
-            <h1 className="title-animation">Face Shape Analyzer</h1>
-            <p className="subtitle-animation">Discover your face shape and suitable style recommendations</p>
+            <h1 className="title-animation">Hairstyle Genie</h1>
+            <p className="subtitle-animation">Discover your face shape and suitable Hairstyle recommendations</p>
           </header>
+
+           <button className="primary-button" onClick={startAnalyzer}>
+             Check Your Face Shape
+              </button>
           
-          <div className="face-shapes-container">
-            <h2 className="section-title">Understanding Face Shapes</h2>
-            
+          <div className="analyzer-cta">
+
             <div className="face-shapes-grid">
               <div className="face-shape-card">
                 <div className="shape-icon oval">◯</div>
@@ -135,11 +138,9 @@ export default function App() {
               </div>
             </div>
             
-            <div className="analyzer-cta">
-              <button className="primary-button pulse-animation" onClick={startAnalyzer}>
-                Check Your Face Shape
-              </button>
-            </div>
+            {/* <div className="analyzer-cta">
+              <h2 className="section-title"></h2>
+            </div> */}
           </div>
           
           <div className="benefits-section">
@@ -306,3 +307,8 @@ export default function App() {
     </div>
   )
 }
+
+
+
+
+

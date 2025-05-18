@@ -2,29 +2,40 @@ import { useState, useRef, useEffect } from 'react'
 import Webcam from 'react-webcam'
 import axios from 'axios'
 import './styles.css'
-import './index.css'
 
 export default function App() {
   const [preview, setPreview] = useState(null)
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState('camera')
-  const [appState, setAppState] = useState('home') // 'home', 'input', 'results'
+  const [appState, setAppState] = useState('home')
   const [analyzerVisible, setAnalyzerVisible] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
   const webcamRef = useRef(null)
   const fileInputRef = useRef(null)
-  
-  // References for animations
+
   const homeRef = useRef(null)
   const analyzerRef = useRef(null)
-  
+
   useEffect(() => {
-    // Add animation class when analyzer becomes visible
-      if (analyzerVisible && analyzerRef.current) {
+    if (analyzerVisible && analyzerRef.current) {
       analyzerRef.current.classList.add('analyzer-appear')
     }
   }, [analyzerVisible])
-  
+
+  // Apply dark mode class to body
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode')
+    } else {
+      document.body.classList.remove('dark-mode')
+    }
+  }, [darkMode])
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode)
+  }
+
   const startAnalyzer = () => {
     if (homeRef.current) {
       homeRef.current.classList.add('fade-out')
@@ -34,7 +45,7 @@ export default function App() {
       }, 500)
     }
   }
-  
+
   const sendFile = async (file) => {
     setLoading(true)
     const formData = new FormData()
@@ -60,7 +71,6 @@ export default function App() {
     sendFile(file)
   }
 
-
   const capture = async () => {
     const imageSrc = webcamRef.current.getScreenshot()
     if (!imageSrc) return
@@ -74,7 +84,7 @@ export default function App() {
   const triggerFileInput = () => {
     fileInputRef.current.click()
   }
-  
+
   const resetApp = () => {
     setAppState('home')
     setAnalyzerVisible(false)
@@ -85,219 +95,197 @@ export default function App() {
     }
   }
 
-  return (
-    <div className="app-wrapper">
-      {appState === 'home' && (
-        <div className="home-container" ref={homeRef}>
-          <header className="home-header">
-            <h1 className="title-animation">Hairstyle Genie</h1>
-            <p className="subtitle-animation">Discover your face shape and suitable Hairstyle recommendations</p>
-          </header>
+  const getImagePaths = () => {
+    if (!result?.gender || !result?.shape) return []
+    const gender = result.gender.toLowerCase()
+    const shape = result.shape.charAt(0).toUpperCase() + result.shape.slice(1).toLowerCase()
+    return Array.from({ length: 5 }, (_, i) =>
+      `/images/${gender}/${shape}/Style ${i + 1}.jpg`
+    )
+  }
 
-           <button className="primary-button" onClick={startAnalyzer}>
-             Check Your Face Shape
-              </button>
-          
-          <div className="analyzer-cta">
-
-            <div className="face-shapes-grid">
-              <div className="face-shape-card">
-                <div className="shape-icon oval">◯</div>
-                <h3>Oval</h3>
-                <p>Balanced proportions with a slightly narrower forehead and jaw.</p>
-              </div>
-              
-              <div className="face-shape-card">
-                <div className="shape-icon round">⬤</div>
-                <h3>Round</h3>
-                <p>Similar width and length with soft curves and fuller cheeks.</p>
-              </div>
-              
-              <div className="face-shape-card">
-                <div className="shape-icon square">◼</div>
-                <h3>Square</h3>
-                <p>Strong jawline with a forehead that's similar in width.</p>
-              </div>
-              
-              <div className="face-shape-card">
-                <div className="shape-icon heart">♥</div>
-                <h3>Heart</h3>
-                <p>Wider forehead that narrows down to a pointed chin.</p>
-              </div>
-              
-              <div className="face-shape-card">
-                <div className="shape-icon diamond">◆</div>
-                <h3>Diamond</h3>
-                <p>Narrow forehead and jawline with wider cheekbones.</p>
-              </div>
-              
-              <div className="face-shape-card">
-                <div className="shape-icon rectangle">▭</div>
-                <h3>Rectangle</h3>
-                <p>Longer face with a forehead, cheeks, and jawline of similar width.</p>
-              </div>
-            </div>
-            
-            {/* <div className="analyzer-cta">
-              <h2 className="section-title"></h2>
-            </div> */}
+  // Footer component with developer information
+  const Footer = () => (
+    <footer className="footer">
+      <div className="footer-container">
+        <h3 className="footer-title">Developers</h3>
+        <div className="developers-list">
+          <div className="developer-item">
+            <div className="developer-name">Sourabh Singh</div>
+            <a 
+              href="https://github.com/Graphical27" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="developer-github"
+            >
+              github.com/Graphical27
+            </a>
           </div>
-          
-          <div className="benefits-section">
-            <h2 className="section-title">Why Know Your Face Shape?</h2>
-            <div className="benefits-grid">
-              <div className="benefit-card">
-                <div className="benefit-icon">💇</div>
-                <h3>Perfect Hairstyle</h3>
-                <p>Find hairstyles that complement your natural features</p>
-              </div>
-              
-              <div className="benefit-card">
-                <div className="benefit-icon">👓</div>
-                <h3>Ideal Eyewear</h3>
-                <p>Choose glasses and sunglasses that balance your proportions</p>
-              </div>
-              
-              <div className="benefit-card">
-                <div className="benefit-icon">💍</div>
-                <h3>Flattering Accessories</h3>
-                <p>Select earrings and accessories that enhance your look</p>
-              </div>
-            </div>
+          <div className="developer-item">
+            <div className="developer-name">Paras Mheta</div>
+            <a 
+              href="https://github.com/Paras-Mehta007" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="developer-github"
+            >
+              github.com/Paras-Mehta007
+            </a>
+          </div>
+          <div className="developer-item">
+            <div className="developer-name">Gaurav Singh</div>
+            <a 
+              href="https://github.com/gauravsinghshah" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="developer-github"
+            >
+              github.com/gauravsinghshah
+            </a>
           </div>
         </div>
-      )}
-      
-      {analyzerVisible && (
-        <div className="analyzer-container" ref={analyzerRef}>
-          <button className="back-button" onClick={resetApp}>← Back to Home</button>
+        <div className="footer-copyright">
+          © {new Date().getFullYear()} Perfect Cut - All Rights Reserved
+        </div>
+      </div>
+    </footer>
+  )
+
+  return (
+    <div className={`app-container ${darkMode ? 'dark-mode' : ''}`}>
+      <div className="theme-toggle">
+        <button 
+          className="theme-toggle-button" 
+          onClick={toggleDarkMode}
+          title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {darkMode ? '☀️' : '🌙'}
+        </button>
+      </div>
+
+      {appState === 'home' && (
+        <div className="home-screen" ref={homeRef}>
+          <div className="home-content">
+            <h1 className="app-title">Perfect Cut</h1>
+            <p className="app-subtitle">Find your ideal hairstyle based on your face shape</p>
+            <button className="start-button" onClick={startAnalyzer}>
+              <span className="button-icon">✓</span>
+              <span className="button-text">Find My Perfect Hairstyle</span>
+            </button>
+          </div>
           
-          <div className="analyzer-card">
-            <div className="analyzer-header">
-              <h2>Analyze Your Face Shape</h2>
-              <p className="analyzer-desc">Take or upload a front-facing photo for accurate results</p>
-            </div>
+          {/* Footer only on main/home page */}
+          <Footer />
+        </div>
+      )}
+
+      {analyzerVisible && (
+        <div className="analyzer" ref={analyzerRef}>
+          <button className="back-button" onClick={resetApp}>
+            <span className="back-icon">←</span>
+            <span className="back-text">Back</span>
+          </button>
+          
+          <div className="analyzer-panel">
+            <h2 className="panel-title">Face Shape Analyzer</h2>
             
-            <div className="tab-navigation">
+            <div className="tabs">
               <button 
-                className={`tab-button ${activeTab === 'camera' ? 'active' : ''}`} 
+                className={`tab ${activeTab === 'camera' ? 'active-tab' : ''}`} 
                 onClick={() => setActiveTab('camera')}
               >
-                Use Camera
+                <span className="tab-icon">📷</span>
+                <span className="tab-text">Camera</span>
               </button>
               <button 
-                className={`tab-button ${activeTab === 'upload' ? 'active' : ''}`} 
+                className={`tab ${activeTab === 'upload' ? 'active-tab' : ''}`} 
                 onClick={() => setActiveTab('upload')}
               >
-                Upload Photo
+                <span className="tab-icon">📁</span>
+                <span className="tab-text">Upload</span>
               </button>
             </div>
-            
-            <div className="analyzer-content">
+
+            <div className="panel-content">
               {activeTab === 'camera' && !loading && !preview && (
-                <div className="camera-container">
-                  <div className="webcam-wrapper">
-                    <Webcam
-                      audio={false}
-                      ref={webcamRef}
-                      screenshotFormat="image/jpeg"
-                      videoConstraints={{ facingMode: 'user' }}
-                      className="webcam"
-                    />
-                    <div className="face-outline-overlay">
-                      <div className="face-outline"></div>
-                    </div>
-                  </div>
-                  <p className="camera-tip">Position your face within the outline and look straight ahead</p>
-                  <button className="capture-button" onClick={capture}>
-                    <span className="camera-icon">📸</span>
+                <div className="camera-view">
+                  <Webcam
+                    audio={false}
+                    ref={webcamRef}
+                    screenshotFormat="image/jpeg"
+                    videoConstraints={{ facingMode: "user" }}
+                    className="webcam-preview"
+                  />
+                  <button className="camera-button" onClick={capture}>
                     Take Photo
                   </button>
+                  <p className="help-text">Center your face in the frame and look straight ahead</p>
                 </div>
               )}
-              
+
               {activeTab === 'upload' && !loading && !preview && (
-                <div className="upload-container">
+                <div className="upload-view">
                   <input
                     type="file"
                     accept="image/*"
                     onChange={onUpload}
                     ref={fileInputRef}
-                    className="hidden-input"
+                    className="file-input"
                   />
-                  <div className="upload-area" onClick={triggerFileInput}>
-                    <div className="upload-icon">
-                      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 5V19M12 5L7 10M12 5L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        <path d="M20 21H4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
-                    </div>
-                    <p className="upload-text">Click to select an image<br /><span className="upload-subtext">or drag and drop</span></p>
+                  <div className="drop-area" onClick={triggerFileInput}>
+                    <div className="upload-icon">📤</div>
+                    <p className="upload-text">Click or drag photo here</p>
+                    <p className="upload-help">Please use a front-facing portrait photo</p>
                   </div>
                 </div>
               )}
-              
+
               {loading && (
-                <div className="loading-container">
-                  <div className="loader"></div>
+                <div className="loading-view">
+                  <div className="spinner"></div>
                   <p className="loading-text">Analyzing your face shape...</p>
+                  <p className="loading-subtext">This will just take a moment</p>
                 </div>
               )}
-              
-              {preview && !loading && appState === 'results' && (
-                <div className="results-container">
-                  <div className="results-grid">
-                    <div className="result-preview">
-                      <img src={preview} alt="Your face" className="result-image" />
-                      <div className="image-overlay"></div>
-                    </div>
-                    
-                    <div className="result-details">
-                      <div className="result-item">
-                        <h3>Your Face Shape</h3>
-                        <p className="result-value">{result?.shape || "Unknown"}</p>
+
+              {preview && !loading && appState === 'results' && result && (
+                <div className="results-view">
+                  <div className="results-header">
+                    <h3 className="results-title">Your Results</h3>
+                    <div className="results-summary">
+                      <div className="user-photo">
+                        <img src={preview} alt="Your photo" className="photo-preview" />
                       </div>
-                      
-                      <div className="result-item">
-                        <h3>Gender Analysis</h3>
-                        <p className="result-value">{result?.gender || "Unknown"}</p>
-                      </div>
-                      
-                      <div className="recommended-styles">
-                        <h3>Recommendations</h3>
-                        <div className="recommendations">
-                          <div className="rec-item">
-                            <span className="rec-icon">💇</span>
-                            <span className="rec-text">
-                              {result?.shape === "Oval" && "Most hairstyles suit this versatile shape"}
-                              {result?.shape === "Round" && "Layered cuts add definition"}
-                              {result?.shape === "Square" && "Soft layers to balance strong jawline"}
-                              {result?.shape === "Heart" && "Side-swept bangs complement wider forehead"}
-                              {result?.shape === "Diamond" && "Hairstyles with volume around the jawline"}
-                              {result?.shape === "Rectangle" && "Cuts with volume on the sides"}
-                              {!result?.shape && "Personalized hairstyle suggestions"}
-                            </span>
-                          </div>
-                          <div className="rec-item">
-                            <span className="rec-icon">👓</span>
-                            <span className="rec-text">
-                              {result?.shape === "Oval" && "Most styles work well"}
-                              {result?.shape === "Round" && "Angular frames add definition"}
-                              {result?.shape === "Square" && "Round or oval frames soften features"}
-                              {result?.shape === "Heart" && "Frames wider at the bottom balance proportions"}
-                              {result?.shape === "Diamond" && "Oval or rimless styles complement angles"}
-                              {result?.shape === "Rectangle" && "Oversized frames shorten face appearance"}
-                              {!result?.shape && "Ideal eyewear for your face shape"}
-                            </span>
-                          </div>
+                      <div className="results-details">
+                        <div className="result-item">
+                          <span className="result-label">Gender:</span>
+                          <span className="result-value"> {result.gender? result.gender.charAt(0).toUpperCase() + result.gender.slice(1): ''}</span>
+                        </div>
+                        <div className="result-item">
+                          <span className="result-label">Face Shape:</span>
+                          <span className="result-value"> {result.shape? result.shape.charAt(0).toUpperCase() + result.shape.slice(1): ''}</span>
                         </div>
                       </div>
-                      
-                      <button className="try-again-button" onClick={resetApp}>
-                        Try Again
-                      </button>
                     </div>
                   </div>
+
+                  <div className="recommendations">
+                    <h3 className="recommendations-title">Recommended Hairstyles</h3>
+                    <div className="styles-grid">
+                      {getImagePaths().map((path, index) => (
+                        <div key={index} className="style-card">
+                          <div className="style-image-container">
+                            <img src={path} alt={`Style ${index + 1}`} className="style-image" />
+                          </div>
+                          <div className="style-name">Style {index + 1}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button className="try-again" onClick={resetApp}>
+                    Try Another Photo
+                  </button>
                 </div>
               )}
             </div>
@@ -307,8 +295,3 @@ export default function App() {
     </div>
   )
 }
-
-
-
-
-

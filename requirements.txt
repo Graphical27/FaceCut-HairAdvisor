@@ -9,4 +9,4 @@ numpy
 scikit-learn
 ultralytics
 opencv-python
-python-multipar
+python-multipart

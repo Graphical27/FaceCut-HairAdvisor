@@ -10,3 +10,5 @@ scikit-learn
 ultralytics
 opencv-python
 python-multipart
+
+

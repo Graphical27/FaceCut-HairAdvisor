@@ -230,51 +230,6 @@ export default function App() {
               </div>
             </div>
           </div>
-
-          {/* Footer */}
-          <footer className={`mt-20 py-12 ${darkMode ? 'bg-gray-800' : 'bg-white'} border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-            <div className="container mx-auto px-6">
-              <h3 className="text-2xl font-bold text-center mb-8">Developers</h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="font-semibold text-lg mb-2">Sourabh Singh</div>
-                  <a
-                    href="https://github.com/Graphical27"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-purple-600 hover:text-purple-800 transition-colors"
-                  >
-                    github.com/Graphical27
-                  </a>
-                </div>
-                <div className="text-center">
-                  <div className="font-semibold text-lg mb-2">Paras Mehta</div>
-                  <a
-                    href="https://github.com/Paras-Mehta007"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-purple-600 hover:text-purple-800 transition-colors"
-                  >
-                    github.com/Paras-Mehta007
-                  </a>
-                </div>
-                <div className="text-center">
-                  <div className="font-semibold text-lg mb-2">Gaurav Singh</div>
-                  <a
-                    href="https://github.com/gauravsinghshah"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-purple-600 hover:text-purple-800 transition-colors"
-                  >
-                    github.com/gauravsinghshah
-                  </a>
-                </div>
-              </div>
-              <div className="text-center mt-8 text-gray-600 dark:text-gray-400">
-                © {new Date().getFullYear()} Perfect Cut - All Rights Reserved
-              </div>
-            </div>
-          </footer>
         </div>
       )}
 
